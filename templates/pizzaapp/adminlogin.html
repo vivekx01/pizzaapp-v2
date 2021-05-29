@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'img/logo.png' %}" alt="" width="50" height="38" class="d-inline-block align-text-top">
+      Pizzeria
+    </a>
+    <a class="btn btn-danger ">Admin Panel</a>
+  </div>
+  
+</nav>
+<style>
+    body {
+      background-image: url({%static "img/pizzahomepage.jpg" %});
+      background-size:cover;
+    }
+</style>
+<div style="padding: 20px; width: 300px; background-color: #fe6e00; display: block; margin:auto; margin-top:170px">
+    <form action="/adminauthenticate/" method="POST">
+        {% csrf_token %}
+        <h5 style="color: white; text-align:center">Admin Login</h5>
+        <input type="text" style="margin-bottom: 15px" class="form-control" placeholder="username" name="username" required>
+        <input type="password" class="form-control" placeholder="password" name="password" required>
+        <input type="submit" style="display: block; margin: auto; margin-top: 10px" class="btn btn-success" name="login" value="Login" required>
+    </form>
+</div>
+{% for message in messages %}
+<p style="text-align: center; color:red">{{message}}</p>
+{% endfor %}
+{% endblock %}

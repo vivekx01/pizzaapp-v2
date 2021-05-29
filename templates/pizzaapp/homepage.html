@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img src="{% static 'img/logo.png' %}" alt="" width="50" height="38" class="d-inline-block align-text-top">
+            Pizzeria
+          </a>
+          <a class="btn btn-success " href="/userlogin/">Login</a>
+        </div>
+        
+    </nav>
+    {% for message in messages %}
+    <p class="alert alert-warning" style="text-align: center;">Account Created. You can now Login!</p>
+    {% endfor %}
+
+    <div class="container-fluid" style="position: relative;height:900px; background-size:cover;  background-image: url('{% static 'img/pizzahomepage.jpg' %}')" >
+        <div style="position:absolute; top:50px; right: 20px; width: 400px; height:400px; background-color: #fe6e00; padding:40px" class="container">
+            <form method="POST" action="/signupuser/">
+                {% csrf_token %}
+                <h2 style="color: white; text-align:center">Sign Up!</h2>
+                <input type="text" class="form-control" placeholder="First Name" name="firstname" style="margin-bottom: 10px" required>
+                <input type="text" class="form-control" placeholder="Last Name" name="lastname" style="margin-bottom: 10px" required>
+                <input type="text" class="form-control" placeholder="Username" name="username" style="margin-bottom: 10px"required>
+                <input type="password" class="form-control" placeholder="Password" name="password" style="margin-bottom: 10px" required> 
+                <input type="text" class="form-control" placeholder="email" name="email" style="margin-bottom: 10px" required> 
+                <input type="submit" class="btn btn-success" style="display:block; margin:auto; margin-top: 10px" value="Sign Up" required>  
+            </form>
+    
+        </div>
+    
+    </div>
+{% endblock %}

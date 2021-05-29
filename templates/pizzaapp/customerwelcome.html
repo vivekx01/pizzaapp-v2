@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/customer/welcome/">
+            <img src="{% static 'img/logo.png' %}" alt="" width="50" height="38" class="d-inline-block align-text-top">
+            Welcome {{username}} !
+        </a>
+        <a class="btn btn-dark " style="margin-right: -820px;" href="/usercart/"><i class="bi bi-cart3"></i>Cart</a>
+        <a class="btn btn-success " href="/myorders/" style="margin-right: -820px"><i class="bi bi-bag"></i> My
+            Orders</a>
+        <a class="btn btn-danger " href="/userlogout/">Logout</a>
+    </div>
+
+</nav>
+{% for message in messages %}
+<div class="alert alert-dark alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+<h2 style="text-align: center;margin-top:5px;">Pizza Delight</h2>
+{% for pizza in pizzas %}
+<form action="/addtocart/{{pizza.id}}/" method="POST">
+    {% csrf_token %}
+    <div class="alert alert-warning" style="margin: 40px">
+        <div class="row">
+            <div class="col md-4">
+                <img src="{{pizza.image.url}}" class="img-fluid rounded" style="height:150px; width:300px" />
+            </div>
+            <div class="col md-4" style="margin-top: 20px;">
+                <h4>{{pizza.name}}</h4>
+                <hr>
+                <h4>Price: ₹{{pizza.price}}</h4>
+            </div>
+            <div class="col md-2" style="margin-top: 20px;">
+                <h5 style="margin-left: 130px;">Select Quantity</h5>
+                <input type="number" min="1" value="0" name=qty style="width:100px; height:30px; margin-left: 150px">
+            </div>
+            <div class="col md-2">
+                <input type="submit" class="btn btn-dark btn-lg" value="Add to cart" style="margin-left: 140px; margin-top:40px">
+            </div>
+        </div>
+    </div>
+</form>
+{% endfor %}
+<footer class="container" style="margin-top: 50px;">
+    <p class="float-end"></p>
+    <p style="text-align: center;">© 2020–2021 Pizzeria, Inc.</p>
+</footer>
+{% endblock %}

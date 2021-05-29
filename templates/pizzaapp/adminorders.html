@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a href="/admin/homepage/" class="btn btn-success">Back to Menu</a>
+      <a href="/adminlogout/" class="btn btn-danger">Logout</a>
+    </div>
+</nav>
+<h1 style="text-align:center">Recieved Orders</h1>
+{% for order in orders %}
+<div style="margin: 40px" class="alert alert-warning" role="alert">
+    <p>Username: {{order.username}}</p>
+    <p>Phone Number: {{order.phone}}</p>
+    <p>Address: {{order.address}}</p>
+    <p>Items: {{order.ordereditems}}</p>
+    <p>Order Status: <a style="color: red">{{order.status}}</a></p>
+    <a href="/acceptorder/{{order.id}}/" class="btn btn-success">Accept</a>
+    <a href="/deleteorder/{{order.id}}/" class="btn btn-danger">Decline</a>
+    
+</div>
+
+{% endfor %}
+
+{% endblock %}

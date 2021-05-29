@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/customer/welcome/">
+                <img src="{% static 'img/logo.png' %}" alt="" width="50" height="38" class="d-inline-block align-text-top">
+                Welcome!
+            </a>
+            <a class="btn btn-dark " href="/customer/welcome/" style="margin-right: -1000px"><i class="bi bi-house-door"></i> Back</a>
+            <a class="btn btn-danger " href="/userlogout/">Logout</a>
+        </div>
+
+    </nav>
+    {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+    <h2 style="text-align: center;margin-top:5px;">Cart Items</h2>
+    {% for useritem in useritems %}
+    <form action="/placeorder/" method="POST">
+        {% csrf_token %}
+        <div class="alert alert-light">
+            <div class="alert alert-dark" style="margin: 40px">
+                <div class="row">
+                    <div class="col md-4">
+                        <img src="{{useritem.item_image}}" class="img-fluid rounded" style="height:150px; width:300px" />
+                    </div>
+                    <div class="col md-4" style="margin-top: 20px;">
+                        <h5>{{useritem.item_name}}</h5>
+                        <hr>
+                        <h5>Price: ₹{{useritem.item_price}}</h5>
+                    </div>
+                    <div class="col md-2" style="margin-top: 20px;">
+                        <h5 style="margin-left: 130px;">Quantity</h5>
+                        <h5 style="margin-left: 130px;">x{{useritem.quantity}}</h5>
+                    </div>
+                    <div class="col md-2">
+                        <a class="btn btn-danger btn-lg" href="/deletefromcart/{{useritem.id}}" style="margin-left: 140px; margin-top:40px"><i
+                                class="bi bi-trash"></i>Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <h2 style="text-align: center;">Order Total: ₹{{totalamount}}</h2>
+
+        <div class="container" style="width: 60%; margin-top:60px;">
+            <h4 style="text-align: center;margin-top:5px;">Enter delivery Information</h4>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" name="phoneno" id="exampleFormControlInput1" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Delivery Address</label>
+                <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3" required></textarea>
+            </div>
+            <input  type="submit" class="btn btn-success btn-lg" value="Place Order" style="margin-left: 320px;">
+        </div>
+    </form>
+    
+
+    <footer class="container" style="margin-top: 50px;">
+        <p class="float-end"></p>
+        <p style="text-align: center;">© 2020–2021 Pizzeria, Inc.</p>
+    </footer>
+{% endblock %}

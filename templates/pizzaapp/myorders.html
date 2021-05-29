@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/customer/welcome/">
+                <img src="{% static 'img/logo.png' %}" alt="" width="50" height="38" class="d-inline-block align-text-top">
+                Welcome!
+            </a>
+            <a class="btn btn-dark " href="/customer/welcome/" style="margin-right: -1000px"><i class="bi bi-house-door"></i> Back</a>
+            <a class="btn btn-danger " href="/userlogout/">Logout</a>
+        </div>
+
+    </nav>
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+    <h2 style="text-align: center;margin-top:5px;">My Orders</h2>
+    {% for order in orders %}
+    <div class="container mt-5 mb-5" style="margin-top: -150px;">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="text-left logo p-2 px-5"> <img src="{% static 'img/logo.png' %}" width="80" height="80"> </div>
+                    <div class="invoice p-5">
+                        <h5>Pizzeria</h5> <span class="font-weight-bold d-block mt-4">Hello, {{firstname}} </span>
+                        <span>Your order Details:</span>
+                        <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="py-2"> <span class="d-block text-muted">Order Status</span>
+                                                <span>{{order.status}}</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="py-2"> <span class="d-block text-muted">Order ID</span>
+                                                <span>#{{order.id}}</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="py-2"> <span class="d-block text-muted">Payment</span>
+                                                COD </div>
+                                        </td>
+                                        <td>
+                                            <div class="py-2"> <span class="d-block text-muted">Delivery Address</span>
+                                                <span>{{order.address}}</span> </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="product border-bottom table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td width="60%"> <span class="font-weight-bold">{{order.ordereditems}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="60%"> <span class="font-weight-bold">Contact: {{order.phone}}</span>
+                                      </td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row d-flex justify-content-end">
+                            <div class="col-md-5">
+                                <table class="table table-borderless">
+                                    <tbody class="totals">
+                                        <tr>
+                                            <td>
+                                                <div class="text-left"> <span class="text-muted">Subtotal</span> </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span>₹{{order.totalamount}}</span> </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="text-left"> <span class="text-muted">Discount</span> </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span class="text-success">N.A</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-top border-bottom">
+                                            <td>
+                                                <div class="text-left"> <span class="font-weight-bold">Total</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span class="font-weight-bold">₹{{order.totalamount}}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p>You will be contacted as soon as the order reaches your location !</p>
+                        <p class="font-weight-bold mb-0">Thank you for choosing us!</p> <span>Team Pizzeria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <footer class="container" style="margin-top: 50px;">
+        <p class="float-end"></p>
+        <p style="text-align: center;">© 2020–2021 Pizzeria, Inc.</p>
+    </footer>
+
+{% endblock %}
+        
