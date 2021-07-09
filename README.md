@@ -1,6 +1,8 @@
 # pizzaapp-v2
 This is an improved version of the previously made online pizza store made on django framework.
+
 Screenshots:
+
 ![1](https://user-images.githubusercontent.com/72996825/120060585-399a0080-c076-11eb-8ccc-c51d767cf842.PNG)
 
 ![2](https://user-images.githubusercontent.com/72996825/120060590-3bfc5a80-c076-11eb-8fac-c16dc9256329.PNG)
